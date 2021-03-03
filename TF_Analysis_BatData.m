@@ -36,10 +36,12 @@ disp('A Hamming window will be used to suppress the sidelobe artifacts.')
 window = hamming(n_anal);
 n=1:n_anal;
 for k=1:n_specdisplay
-    gram(k,:) = ifft((window.*data(n)),fft_length)';
+    gram(k,:) = T*fft(window.*data(n),fft_length)';
     n=n+n_step;
 end
 
 titletext = input(['Type title for TFA color gram: ']);
 plot_color_gram_STFT(gram,data,Fs,n_step,titletext)
 
+
+ 
