@@ -36,7 +36,8 @@ disp('A Hamming window will be used to suppress the sidelobe artifacts.')
 window = hamming(n_anal);
 n=1:n_anal;
 for k=1:n_specdisplay
-    gram(k,:) = T*fft(window.*data(n),fft_length)';
+    z = T*fftshift(fft(window.*data(n),fft_length))';
+    gram(k,:) = real(z).^2 + imag(z).^2;
     n=n+n_step;
 end
 
